@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical"
+    android:id="@+id/exam"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:background="#93EAC2"
+    android:padding="10dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView
+        android:id="@+id/exam_name"
+        android:text="Exam 1"
+        android:fontFamily="@font/arial"
+        android:textColor="#3F51B5"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/exam_desc"
+        android:layout_marginTop="5dp"
+        android:text="Easy: 60%, Meidum: 30%, Hard: 10%. Total: 20 questions"
+        android:fontFamily="@font/arial"
+        android:textStyle="italic"
+        android:textColor="#2A70A5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

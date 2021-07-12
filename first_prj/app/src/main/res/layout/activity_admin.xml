@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="adminName"
+            type="String" />
+    </data>
+
+    <LinearLayout
+        android:background="#63CAEB"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/admin_name"
+            android:text="Hi, admin1,"
+            android:textColor="@color/white"
+            android:fontFamily="@font/arial"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:layout_weight="4"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <TextView
+                android:id="@+id/admin_result"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="Result"
+                android:fontFamily="@font/arial"
+                android:textColor="@color/white"
+                android:textSize="23dp"
+                android:layout_margin="20dp"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/admin_listStudent"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="List students"
+                android:fontFamily="@font/arial"
+                android:textColor="@color/white"
+                android:textSize="23dp"
+                android:layout_margin="20dp"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/admin_listExamConfig"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="List exam configs"
+                android:fontFamily="@font/arial"
+                android:textColor="@color/white"
+                android:textSize="23dp"
+                android:layout_margin="20dp"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/logout"
+            android:text="Logout"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:backgroundTint="#061D49"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</layout>
