@@ -17,6 +17,7 @@ export default class Result extends React.Component {
         var urlencoded = new URLSearchParams();
         urlencoded.append("email", localStorage.getItem("email"));
         urlencoded.append("ssid", localStorage.getItem("ssid"));
+        urlencoded.append("roles", localStorage.getItem("roles"));
 
         var requestOptions = {
             method: 'POST',

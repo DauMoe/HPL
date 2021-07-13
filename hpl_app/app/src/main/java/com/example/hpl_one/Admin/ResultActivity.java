@@ -32,7 +32,7 @@ import retrofit2.Response;
 public class ResultActivity extends AppCompatActivity {
     private ActivityResultBinding binding;
     private APIConfig f = RetrofitConfig.JSONconfig().create(APIConfig.class);
-    private String email, ssid;
+    private String email, ssid, roles;
     private SharedPreferences pref;
     private ResultAdapter adapter;
     private List<Result> data = new ArrayList<>();
@@ -45,6 +45,7 @@ public class ResultActivity extends AppCompatActivity {
         pref                        = getSharedPreferences(Config.LOGIN_STATE, MODE_PRIVATE);
         email                       = pref.getString(Config.EMAIL, null);
         ssid                        = pref.getString(Config.SSID, null);
+        roles                       = pref.getString(Config.ROLES, null);
         adapter                     = new ResultAdapter(getApplicationContext());
         LinearLayoutManager manager = new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL, false);
         binding.resultRcv.setLayoutManager(manager);
@@ -53,7 +54,7 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     private void GetListResult(ResultAdapter adapter) {
-        Call<RespObject> g = f.GetListResults(ssid, email);
+        Call<RespObject> g = f.GetListResults(ssid, email, roles);
         g.enqueue(new Callback<RespObject>() {
             @Override
             public void onResponse(Call<RespObject> call, Response<RespObject> response) {

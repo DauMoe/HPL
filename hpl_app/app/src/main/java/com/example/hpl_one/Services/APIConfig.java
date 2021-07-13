@@ -66,7 +66,7 @@ public interface APIConfig {
 
     //Create new result
     @FormUrlEncoded
-    @POST("api/result/")
+    @POST("api/create_result/")
     Call<ResponseBody> Submit(
             @Field("ssid") String ssid,
             @Field("email") String email,
@@ -96,6 +96,7 @@ public interface APIConfig {
     @POST("api/get_result/")
     Call<RespObject> GetListResults(
             @Field("ssid") String ssid,
-            @Field("email") String email
+            @Field("email") String email,
+            @Field("roles") String roles
     );
 }

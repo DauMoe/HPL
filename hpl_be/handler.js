@@ -407,6 +407,7 @@ let get_exam = function(req, resp) {
 let create_result = function(req, resp) {
     console.log("========= RECORD RESULT ========");
     rq = req.body;
+    console.log(rq);
     if (!rq.result || rq.result.trim() == "") {
         resp.status(422);
         resp.json({ msg: "Result is required!" });
@@ -436,9 +437,14 @@ let create_result = function(req, resp) {
 };
 
 let get_result = function(req, resp) {
-    rq = req.body;
     console.log("========= GET RESULT ========");
-    db.get_result((!rq.email) ? -1 : rq.email)
+    rq = req.body;
+    if (!rq.roles || rq.roles.trim() == "") {
+        resp.status(422);
+        resp.json({ msg: "Roles is required!" });
+        return;
+    }
+    db.get_result((Number(rq.roles) == 1) ? -1 : rq.email)
         .then(function(res) {
             if (res.code == 200) {
                 resp.status(200);
