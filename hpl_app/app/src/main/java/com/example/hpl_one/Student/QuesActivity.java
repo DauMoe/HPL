@@ -159,7 +159,8 @@ public class QuesActivity extends AppCompatActivity {
     private void checkAns(String ans) {
         if (isAns) return;
         isAns = true;
-        switch (x.getCorrect_ans()) {
+
+        switch (x.getCorrect_ans().replaceAll("\"", "")) {
             case "A":
                 ans_a.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.correct_ans));
                 break;
@@ -174,7 +175,7 @@ public class QuesActivity extends AppCompatActivity {
                 break;
         }
 
-        if (!ans.equalsIgnoreCase(x.getCorrect_ans())) {
+        if (!ans.equals(x.getCorrect_ans().replaceAll("\"", ""))) {
             switch (ans) {
                 case "A":
                     ans_a.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.error_ans));
