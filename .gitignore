@@ -2,8 +2,11 @@
 
 # dependencies
 /node_modules
+/NEW_BE/node_modules
+/hpl_be/node_modules
 /.pnp
 .pnp.js
+*.idea
 
 # testing
 /coverage
