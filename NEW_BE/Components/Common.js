@@ -31,6 +31,24 @@ const Common = {
 
     SuccessResp: (resp, msg) => {
         Common.CustomResp(resp, 200 , msg);
+    },
+
+    Con4Java: (msg) => {
+        return "\""+msg+"\"";
+    },
+
+    HandleResp: (err, resp, reject, resolve) => {
+        if (err) {
+            reject({
+                code: 900,
+                message: err.message
+            })
+        } else {
+            resolve({
+                code: 200,
+                message: resp
+            })
+        }
     }
 }
 

@@ -10,10 +10,12 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
+//Play video from URL: https://stackoverflow.com/questions/40433248/play-video-from-url-in-videoview-android
+
 public interface APIConfig {
     //Login
     @FormUrlEncoded
-    @POST("api/login/")
+    @POST("user/login/")
     Call<User> login(
             @Field("email") String email,
             @Field("password") String pass
