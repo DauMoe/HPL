@@ -23,7 +23,7 @@ public interface APIConfig {
 
     //Create user
     @FormUrlEncoded
-    @POST("api/new_user/")
+    @POST("user/new_user/")
     Call createUser(
             @Field("ssid") String ssid,
             @Field("email") String email,
