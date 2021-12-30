@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 29, 2021 at 09:34 AM
+-- Generation Time: Dec 30, 2021 at 11:51 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.2.32
 
@@ -20,6 +20,50 @@ SET time_zone = "+00:00";
 --
 -- Database: `hpl_new`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `config_exam`
+--
+
+CREATE TABLE `config_exam` (
+  `id` int(11) NOT NULL COMMENT 'config_id',
+  `name` varchar(255) DEFAULT '' COMMENT 'name of config',
+  `num_easy` int(11) DEFAULT NULL COMMENT 'number of easy question',
+  `num_medium` int(11) DEFAULT NULL COMMENT 'number of medium question',
+  `num_hard` int(11) DEFAULT 0 COMMENT 'number of hard question',
+  `time_exam` int(11) DEFAULT 0 COMMENT 'minutes'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `config_exam`
+--
+
+INSERT INTO `config_exam` (`id`, `name`, `num_easy`, `num_medium`, `num_hard`, `time_exam`) VALUES
+(1, 'exam1', 50, 30, 20, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `exam_result`
+--
+
+CREATE TABLE `exam_result` (
+  `id` int(11) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `result` varchar(255) DEFAULT NULL,
+  `starttime` varchar(255) DEFAULT NULL,
+  `endtime` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `exam_result`
+--
+
+INSERT INTO `exam_result` (`id`, `email`, `result`, `starttime`, `endtime`) VALUES
+(1, 'b', '90/100', '12412', '13123'),
+(2, 'a', '12/42', '24.124.42', '24.124.42');
 
 -- --------------------------------------------------------
 
@@ -257,7 +301,7 @@ INSERT INTO `structure_english` (`id`, `name_struct`, `structure_eng`, `mean_exa
 --
 
 CREATE TABLE `user` (
-  `id` decimal(5,0) NOT NULL,
+  `id` int(11) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
@@ -271,12 +315,25 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `email`, `username`, `password`, `dob`, `sex`, `roles`) VALUES
-('1', 'bac@gmail.com', 'bac', '123', '12/11/1991', 'nu', '1'),
-('2', 'an@gmail.com', 'an', '123', '01/01/1989', 'nam', '0');
+(1, 'a', 'bac', '123', '12/11/1991', 'nu', '1'),
+(2, 'f', 'an', '123', '01/01/1989', 'nam', '0'),
+(3, 'test', 'anv', '123', '', '', '1');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `config_exam`
+--
+ALTER TABLE `config_exam`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `exam_result`
+--
+ALTER TABLE `exam_result`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `question_eng`
@@ -301,10 +358,28 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `config_exam`
+--
+ALTER TABLE `config_exam`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'config_id', AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `exam_result`
+--
+ALTER TABLE `exam_result`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `question_eng`
 --
 ALTER TABLE `question_eng`
   MODIFY `id` int(5) NOT NULL AUTO_INCREMENT COMMENT 'question id', AUTO_INCREMENT=245;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
