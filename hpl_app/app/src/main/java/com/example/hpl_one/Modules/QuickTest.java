@@ -2,24 +2,32 @@ package com.example.hpl_one.Modules;
 
 public class QuickTest {
     private int ID;
-    private String ques, answer_a, answer_b, answer_c, answer_d, correct_ans, user_ans;
+    private String question, question_path, ans_a, ans_a_path, ans_b, ans_b_path, ans_c, ans_c_path, ans_d, ans_d_path, correct_ans, user_ans;
     private int SelectedAnsPos;
     private boolean AnsA, AnsB, AnsC, AnsD;
 
-    public QuickTest(int ID, String ques, String answer_a, String answer_b, String answer_c, String answer_d, String correct_ans) {
-        this.ID = ID;
-        this.ques = ques;
-        this.answer_a = answer_a;
-        this.answer_b = answer_b;
-        this.answer_c = answer_c;
-        this.answer_d = answer_d;
-        this.correct_ans = correct_ans;
-        this.user_ans = "";
+    public QuickTest() {
     }
 
-
-    public boolean isAnsA() {
-        return AnsA;
+    public QuickTest(int ID, String question, String question_path, String ans_a, String ans_a_path, String ans_b, String ans_b_path, String ans_c, String ans_c_path, String ans_d, String ans_d_path, String correct_ans, String user_ans, int selectedAnsPos, boolean ansA, boolean ansB, boolean ansC, boolean ansD) {
+        this.ID = ID;
+        this.question = question;
+        this.question_path = question_path;
+        this.ans_a = ans_a;
+        this.ans_a_path = ans_a_path;
+        this.ans_b = ans_b;
+        this.ans_b_path = ans_b_path;
+        this.ans_c = ans_c;
+        this.ans_c_path = ans_c_path;
+        this.ans_d = ans_d;
+        this.ans_d_path = ans_d_path;
+        this.correct_ans = correct_ans;
+        this.user_ans = user_ans;
+        SelectedAnsPos = selectedAnsPos;
+        AnsA = ansA;
+        AnsB = ansB;
+        AnsC = ansC;
+        AnsD = ansD;
     }
 
     public void setAnsA(boolean ansA) {
@@ -90,44 +98,84 @@ public class QuickTest {
         this.ID = ID;
     }
 
-    public String getQues() {
-        return ques;
+    public String getQuestion() {
+        return question;
     }
 
-    public void setQues(String ques) {
-        this.ques = ques;
+    public void setQuestion(String question) {
+        this.question = question;
     }
 
-    public String getAnswer_a() {
-        return answer_a;
+    public String getQuestion_path() {
+        return question_path;
     }
 
-    public void setAnswer_a(String answer_a) {
-        this.answer_a = answer_a;
+    public void setQuestion_path(String question_path) {
+        this.question_path = question_path;
     }
 
-    public String getAnswer_b() {
-        return answer_b;
+    public String getAns_a() {
+        return ans_a;
     }
 
-    public void setAnswer_b(String answer_b) {
-        this.answer_b = answer_b;
+    public void setAns_a(String ans_a) {
+        this.ans_a = ans_a;
     }
 
-    public String getAnswer_c() {
-        return answer_c;
+    public String getAns_a_path() {
+        return ans_a_path;
     }
 
-    public void setAnswer_c(String answer_c) {
-        this.answer_c = answer_c;
+    public void setAns_a_path(String ans_a_path) {
+        this.ans_a_path = ans_a_path;
     }
 
-    public String getAnswer_d() {
-        return answer_d;
+    public String getAns_b() {
+        return ans_b;
     }
 
-    public void setAnswer_d(String answer_d) {
-        this.answer_d = answer_d;
+    public void setAns_b(String ans_b) {
+        this.ans_b = ans_b;
+    }
+
+    public String getAns_b_path() {
+        return ans_b_path;
+    }
+
+    public void setAns_b_path(String ans_b_path) {
+        this.ans_b_path = ans_b_path;
+    }
+
+    public String getAns_c() {
+        return ans_c;
+    }
+
+    public void setAns_c(String ans_c) {
+        this.ans_c = ans_c;
+    }
+
+    public String getAns_c_path() {
+        return ans_c_path;
+    }
+
+    public void setAns_c_path(String ans_c_path) {
+        this.ans_c_path = ans_c_path;
+    }
+
+    public String getAns_d() {
+        return ans_d;
+    }
+
+    public void setAns_d(String ans_d) {
+        this.ans_d = ans_d;
+    }
+
+    public String getAns_d_path() {
+        return ans_d_path;
+    }
+
+    public void setAns_d_path(String ans_d_path) {
+        this.ans_d_path = ans_d_path;
     }
 
     public String getCorrect_ans() {
@@ -144,5 +192,9 @@ public class QuickTest {
 
     public void setUser_ans(String user_ans) {
         this.user_ans = user_ans;
+    }
+
+    public boolean isAnsA() {
+        return AnsA;
     }
 }

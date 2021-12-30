@@ -35,7 +35,7 @@ public interface APIConfig {
 
     //Get question
     @FormUrlEncoded
-    @POST("api/get_ques/")
+    @POST("question/single/")
     Call<Question> getQues(
             @Field("ssid") String ssid,
             @Field("email") String email,
@@ -44,7 +44,7 @@ public interface APIConfig {
 
     //Logout
     @FormUrlEncoded
-    @POST("api/logout/")
+    @POST("user/logout/")
     Call<ResponseBody> logout(
             @Field("ssid") String ssid,
             @Field("email") String email);
@@ -58,13 +58,32 @@ public interface APIConfig {
             @Field("id") String id
             );
 
-    //Get List Exam
+    //Get list exam config
     @FormUrlEncoded
-    @POST("api/get_exam_config/")
+    @POST("question/list_config//")
+    Call<RespObject> GetListExamConfigs(
+            @Field("ssid") String ssid,
+            @Field("email") String email
+    );
+
+    //Get List Result of Exam
+    @FormUrlEncoded
+    @POST("question/list_config/")
     Call<RespObject> GetListExam(
             @Field("ssid") String ssid,
             @Field("email") String email
     );
+
+    //Get list result
+    @FormUrlEncoded
+    @POST("question/list_result/")
+    Call<RespObject> GetListResults(
+            @Field("ssid") String ssid,
+            @Field("email") String email,
+            @Field("roles") String roles
+    );
+
+    //=============================================
 
     //Create new result
     @FormUrlEncoded
@@ -83,22 +102,5 @@ public interface APIConfig {
     Call<RespObject> GetListStudents(
             @Field("ssid") String ssid,
             @Field("email") String email
-    );
-
-    //Get list exam config
-    @FormUrlEncoded
-    @POST("api/get_exam_config/")
-    Call<RespObject> GetListExamConfigs(
-            @Field("ssid") String ssid,
-            @Field("email") String email
-    );
-
-    //Get list result
-    @FormUrlEncoded
-    @POST("api/get_result/")
-    Call<RespObject> GetListResults(
-            @Field("ssid") String ssid,
-            @Field("email") String email,
-            @Field("roles") String roles
     );
 }

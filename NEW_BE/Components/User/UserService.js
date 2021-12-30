@@ -48,7 +48,12 @@ const NewUser = async(req, resp) => {
     }
 }
 
+const Logout = async(req, resp) => {
+    SuccessResp(resp, ["ok"]);
+}
+
 module.exports = {
     Login: Login,
-    NewUser: NewUser
+    NewUser: NewUser,
+    Logout: Logout
 }

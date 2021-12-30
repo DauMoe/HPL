@@ -42,11 +42,11 @@ public class QuickTestAdapter extends RecyclerView.Adapter<QuickTestAdapter.Quic
         QuickTest item = data.get(position);
         if (item == null) return;
 
-        holder.test_ques.setText((position+1)+". "+item.getQues());
-        holder.test_ans_a.setText("A. "+item.getAnswer_a());
-        holder.test_ans_b.setText("B. "+item.getAnswer_b());
-        holder.test_ans_c.setText("C. "+item.getAnswer_c());
-        holder.test_ans_d.setText("D. "+item.getAnswer_d());
+        holder.test_ques.setText((position+1)+". "+item.getQuestion());
+        holder.test_ans_a.setText("A. "+item.getAns_a());
+        holder.test_ans_b.setText("B. "+item.getAns_b());
+        holder.test_ans_c.setText("C. "+item.getAns_c());
+        holder.test_ans_d.setText("D. "+item.getAns_d());
 
         holder.test_ans_a.setChecked(item.isAnsA());
         holder.test_ans_b.setChecked(item.isAnsB());
