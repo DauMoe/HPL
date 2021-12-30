@@ -1,5 +1,5 @@
 const {getString, getNumber, CustomResp, SuccessResp, Con4Java} = require("./../Common");
-const {GetSingleQuestionByLevelDAO, CreateExamByConfigDAO, GetExamConfigDAO, GetExamResultDAO} = require("./QuestionDAO");
+const {GetSingleQuestionByLevelDAO, CreateExamByConfigDAO, GetExamConfigDAO, GetExamResultDAO, NewResultDAO} = require("./QuestionDAO");
 
 const GetSingleQuesByLevel = async(req, resp) => {
     let reqData = req.body;
@@ -105,9 +105,30 @@ const GetResultExam = async(req, resp) => {
     }
 }
 
+const NewResult = async (req, resp) => {
+    let reqData = req.body;
+    try {
+        let email = getString(reqData, "email");
+        let result = getString(reqData, "result");
+        let starttime = getString(reqData, "starttime");
+        let endtime = getString(reqData, "endtime");
+
+        let response = await NewResultDAO(email, result, starttime, endtime);
+
+        if (response.code === 200) {
+            SuccessResp(resp, [Con4Java("ok")]);
+        } else {
+            CustomResp(resp, response.code, [Con4Java(response.message)]);
+        }
+    } catch (e) {
+        CustomResp(resp, 900, [Con4Java(e.message)]);
+    }
+}
+
 module.exports = {
     GetSingleQuesByLevel: GetSingleQuesByLevel,
     CreateExamByConfig: CreateExamByConfig,
     GetExamConfig: GetExamConfig,
-    GetResultExam: GetResultExam
+    GetResultExam: GetResultExam,
+    NewResult: NewResult
 }

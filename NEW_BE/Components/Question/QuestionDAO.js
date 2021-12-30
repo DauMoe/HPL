@@ -93,9 +93,19 @@ const GetExamResultDAO = (email, callback) => {
     });
 }
 
+const NewResultDAO = async(email, result, starttime, endtime) => {
+    let sql = "INSERT INTO exam_result (email, result, starttime, endtime) VALUES (?,?,?,?)";
+    return new Promise(function (resolve, reject) {
+       conn.query(sql, [email, result, starttime, endtime], function (err, resp) {
+           HandleResp(err, resp, reject, resolve);
+       })
+    });
+}
+
 module.exports = {
     GetSingleQuestionByLevelDAO: GetSingleQuestionByLevelDAO,
     CreateExamByConfigDAO: CreateExamByConfigDAO,
     GetExamConfigDAO: GetExamConfigDAO,
-    GetExamResultDAO: GetExamResultDAO
+    GetExamResultDAO: GetExamResultDAO,
+    NewResultDAO: NewResultDAO
 }
