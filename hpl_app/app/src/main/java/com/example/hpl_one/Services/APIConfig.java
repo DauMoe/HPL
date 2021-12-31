@@ -83,11 +83,9 @@ public interface APIConfig {
             @Field("roles") String roles
     );
 
-    //=============================================
-
     //Create new result
     @FormUrlEncoded
-    @POST("api/create_result/")
+    @POST("question/new_result/")
     Call<ResponseBody> Submit(
             @Field("ssid") String ssid,
             @Field("email") String email,
@@ -95,6 +93,8 @@ public interface APIConfig {
             @Field("end") String endtime,
             @Field("result") String result
     );
+
+    //=============================================
 
     //Get list student
     @FormUrlEncoded
