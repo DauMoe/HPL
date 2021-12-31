@@ -29,7 +29,7 @@ public class StudentActivity extends AppCompatActivity {
     private SharedPreferences pref;
     private ImageView logout;
     private APIConfig f;
-    private String email, ssid;
+    private String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +55,6 @@ public class StudentActivity extends AppCompatActivity {
         f                       = RetrofitConfig.JSONconfig().create(APIConfig.class);
 
         email                   =  pref.getString(Config.EMAIL, null);
-        ssid                    =  pref.getString(Config.SSID, null);
         String username         =  pref.getString(Config.USER, null);
 
         Log.i("USERNAME", pref.getString(Config.USER, null));
@@ -67,7 +66,7 @@ public class StudentActivity extends AppCompatActivity {
         easy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ques_intent.putExtra("level", "0");
+                ques_intent.putExtra("level", "1");
                 startActivity(ques_intent);
             }
         });
@@ -75,7 +74,7 @@ public class StudentActivity extends AppCompatActivity {
         medium.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ques_intent.putExtra("level", "1");
+                ques_intent.putExtra("level", "2");
                 startActivity(ques_intent);
             }
         });
@@ -83,7 +82,7 @@ public class StudentActivity extends AppCompatActivity {
         difficult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ques_intent.putExtra("level", "2");
+                ques_intent.putExtra("level", "3");
                 startActivity(ques_intent);
             }
         });
@@ -99,7 +98,7 @@ public class StudentActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "Wait a minute!", Toast.LENGTH_SHORT).show();
-                Call g = f.logout(ssid, email);
+                Call g = f.logout();
                 g.enqueue(new Callback() {
                     @Override
                     public void onResponse(Call call, Response response) {

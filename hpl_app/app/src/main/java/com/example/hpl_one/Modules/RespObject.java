@@ -3,13 +3,25 @@ package com.example.hpl_one.Modules;
 import java.util.ArrayList;
 
 public class RespObject {
-    private int time, total;
+    private int time, total, code;
     private ArrayList<?> msg;
 
-    public RespObject(int time, int total, ArrayList<?> msg) {
+    public RespObject(int time, int total, int code, ArrayList<?> msg) {
         this.time = time;
         this.total = total;
+        this.code = code;
         this.msg = msg;
+    }
+
+    public RespObject() {
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 
     public int getTime() {

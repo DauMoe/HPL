@@ -78,7 +78,6 @@ public class QuickTestAdapter extends RecyclerView.Adapter<QuickTestAdapter.Quic
             test_ans_b  = itemView.findViewById(R.id.qtest_ans_b);
             test_ans_c  = itemView.findViewById(R.id.qtest_ans_c);
             test_ans_d  = itemView.findViewById(R.id.qtest_ans_d);
-//            qtest_area  = itemView.findViewById(R.id.qtest_area);
 
             test_ans_a.setOnClickListener(this);
             test_ans_b.setOnClickListener(this);

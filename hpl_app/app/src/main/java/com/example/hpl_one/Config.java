@@ -10,6 +10,7 @@ public class Config {
     public static final String USER         = "username";
     public static final String EMAIL        = "email";
     public static final String ROLES        = "roles";
+    public static final String USER_ID      = "user_id";
 
     //Base URL
 //    public static final String BASE_URL     = "http://135850830a76.ngrok.io/";

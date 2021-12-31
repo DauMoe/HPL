@@ -8,11 +8,11 @@ const Login = async(req, resp) => {
         let pass  = getString(reqData, "password");
         let result = await LoginDAO(email, pass);
         if (result.code === 200) {
-            if (result.msg.length === 0) {
+            if (result.message.length === 0) {
                 CustomResp(resp, 201, [Con4Java("Email or password is invalid!")]);
                 return;
             }
-            let x = result.msg[0];
+            let x = result.message[0];
             delete x.password;
             SuccessResp(resp, [{
                 "id": x.id,

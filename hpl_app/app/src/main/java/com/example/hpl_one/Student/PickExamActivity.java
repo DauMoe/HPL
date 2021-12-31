@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,13 +12,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hpl_one.Adapter.ExamAdapter;
+import com.example.hpl_one.Admin.AdminActivity;
 import com.example.hpl_one.Config;
+import com.example.hpl_one.LoginActivity;
 import com.example.hpl_one.Modules.Exam;
 import com.example.hpl_one.Modules.RespObject;
 import com.example.hpl_one.R;
 import com.example.hpl_one.Services.APIConfig;
 import com.example.hpl_one.Services.RetrofitConfig;
 import com.google.gson.Gson;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,16 +60,24 @@ public class PickExamActivity extends AppCompatActivity {
         picker_exam_rcv.setLayoutManager(manager);
         picker_exam_rcv.setAdapter(adapter);
 
-        Call<RespObject> g = f.GetListExam(ssid, email);
+        Call<RespObject> g = f.GetListExam();
         g.enqueue(new Callback<RespObject>() {
             @Override
             public void onResponse(Call<RespObject> call, Response<RespObject> response) {
                 if (response.isSuccessful()) {
-                    List<Exam> data = new ArrayList<Exam>();
-                    for (Object i: response.body().getMsg()) {
-                        data.add(convert.fromJson(i.toString(), Exam.class));
+                    try {
+                        if (response.body().getCode() == 200) {
+                            JSONObject a = new JSONObject(response.body().getMsg().get(0).toString());
+
+                        }
+                    } catch (JSONException e) {
+                        Log.e("CONVERT IN LoginActivity.java", "Convert to JSON fail!");
                     }
-                    adapter.setData(data);
+//                    List<Exam> data = new ArrayList<Exam>();
+//                    for (Object i: response.body().getMsg()) {
+//                        data.add(convert.fromJson(i.toString(), Exam.class));
+//                    }
+//                    adapter.setData(data);
                 }
             }
 

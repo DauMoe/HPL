@@ -4,6 +4,15 @@ const {HandleResp} = require("./../Common");
 const mysql = require("mysql");
 const conn = mysql.createConnection(DB_CONFIG);
 
+const GetAllStructureDAO = async() => {
+    return new Promise(function (resolve, reject) {
+        let sql = "SELECT id, name_struct FROM structure_english";
+        conn.query(sql, [], function (err, resp) {
+            HandleResp(err, resp, reject, resolve);
+        })
+    });
+}
+
 const SearchStructureDAO = async(q) => {
     return new Promise(function (resolve, reject) {
         let sql = "SELECT id, name_struct FROM structure_english WHERE name_struct LIKE ?";
@@ -34,5 +43,6 @@ const GetDetailStructureDAO = async (id) => {
 module.exports = {
     SearchStructureDAO: SearchStructureDAO,
     GetRandomStructureDAO: GetRandomStructureDAO,
-    GetDetailStructureDAO: GetDetailStructureDAO
+    GetDetailStructureDAO: GetDetailStructureDAO,
+    GetAllStructureDAO: GetAllStructureDAO
 }
