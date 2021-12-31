@@ -64,20 +64,17 @@ public class PickExamActivity extends AppCompatActivity {
         g.enqueue(new Callback<RespObject>() {
             @Override
             public void onResponse(Call<RespObject> call, Response<RespObject> response) {
-                if (response.isSuccessful()) {
-                    try {
-                        if (response.body().getCode() == 200) {
-                            JSONObject a = new JSONObject(response.body().getMsg().get(0).toString());
-
-                        }
-                    } catch (JSONException e) {
-                        Log.e("CONVERT IN LoginActivity.java", "Convert to JSON fail!");
+                if (response.body().getCode() == 200) {
+                    //https://github.com/DauMoe/APP_Hung/blob/main/app/src/main/java/com/example/kmamanager/Fragment/HomeFragment.java
+                    ArrayList<Exam> r = new ArrayList<>();
+                    for (Object i: response.body().getMsg()) {
+                        Exam x = new Gson().fromJson(i.toString(), Exam.class);
+                        r.add(x);
                     }
-//                    List<Exam> data = new ArrayList<Exam>();
-//                    for (Object i: response.body().getMsg()) {
-//                        data.add(convert.fromJson(i.toString(), Exam.class));
-//                    }
-//                    adapter.setData(data);
+                    adapter.setData(r);
+                }else {
+                    //Another err. Msg will be returned by server
+                    Toast.makeText(getApplicationContext(), response.body().getMsg().get(0).toString(), Toast.LENGTH_LONG).show();
                 }
             }
 

@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.ArrayMap;
 import android.view.View;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -26,11 +27,15 @@ import com.example.hpl_one.Services.APIConfig;
 import com.example.hpl_one.Services.RetrofitConfig;
 import com.google.gson.Gson;
 
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -112,6 +117,12 @@ public class QuickTestActivity extends AppCompatActivity implements OnOptionSele
                 correctTotal++;
             }
         }
+        Map<String, Object> mReq = new ArrayMap<>();
+        mReq.put("email", email);
+        mReq.put("password", password);
+        RequestBody body = RequestBody
+                .create(okhttp3.MediaType.parse("application/json; charset=utf-8"), (new JSONObject(mReq)).toString());
+        APIConfig x = RetrofitConfig.JSONconfig().create(APIConfig.class);
         Call<ResponseBody> g = f.Submit(ssid, email, starttime, endtime, String.valueOf(correctTotal+"/"+data.size()));
         g.enqueue(new Callback<ResponseBody>() {
             @Override

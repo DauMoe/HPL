@@ -44,7 +44,7 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ExamViewHolder
         Exam item = data.get(position);
         if (item == null) return;
         holder.exam_name.setText(item.getName());
-        holder.exam_desc.setText("Easy: "+item.getEasy()+"%\nMeidum: "+item.getMedium()+"%\nHard: "+item.getHard()+"%\nTotal: "+item.getTotal()+" ques\nTime: "+item.getTime_exam() + " mins");
+        holder.exam_desc.setText("Easy: "+item.getNum_easy()+"questions\nMeidum: "+item.getNum_medium()+"questions\nHard: "+item.getNum_hard()+"questions\nTime: "+item.getTime_exam() + " mins");
         if (isClickable) {
             holder.exam.setOnClickListener(new View.OnClickListener() {
                 @Override
