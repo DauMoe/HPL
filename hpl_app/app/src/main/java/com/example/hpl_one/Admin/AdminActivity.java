@@ -74,7 +74,7 @@ public class AdminActivity extends AppCompatActivity{
     }
 
     private void logout() {
-        Call<ResponseBody> g = f.logout(ssid, email);
+        Call<ResponseBody> g = f.logout();
         g.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

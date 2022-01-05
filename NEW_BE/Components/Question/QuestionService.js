@@ -9,7 +9,7 @@ const GetSingleQuesByLevel = async(req, resp) => {
         if (result.code === 200) {
             let i = result.message[0];
             SuccessResp(resp, [{
-                "question": i.question === null ? Con4Java("") : Con4Java(i.question),
+                "question": i.question === null ? Con4Java("Audio question. Please listen audio and choose the correct answer") : Con4Java(i.question),
                 "question_path": i.question_path === null ? Con4Java("") : Con4Java(i.question_path),
                 "ans_a": i.ans_a === null ? Con4Java("") : Con4Java(i.ans_a),
                 "ans_b": i.ans_b === null ? Con4Java("") : Con4Java(i.ans_b),
@@ -36,7 +36,7 @@ const CreateExamByConfig = (req, resp) => {
                 // console.log("Service: " + result.message.length);
                 for (let i of result.message) {
                     ListResp.push({
-                        "question": i.question === null ? Con4Java("") : Con4Java(i.question),
+                        "question": i.question === null ? Con4Java("Listen audio and choose correct answer") : Con4Java(i.question),
                         "question_path": i.question_path === null ? Con4Java("") : Con4Java(i.question_path),
                         "ans_a": i.ans_a === null ? Con4Java("") : Con4Java(i.ans_a),
                         "ans_b": i.ans_b === null ? Con4Java("") : Con4Java(i.ans_b),

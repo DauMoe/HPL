@@ -19,6 +19,10 @@ public interface APIConfig {
     @POST("user/new_user/")
     Call<RespObject> createUser(@Body RequestBody reqBody);
 
+    //Get list students
+    @POST("user/get_student/")
+    Call<RespObject> GetListStudents();
+
     //Logout
     @POST("user/logout/")
     Call<ResponseBody> logout();
@@ -29,7 +33,7 @@ public interface APIConfig {
 
     //Get list exam config
     @POST("question/list_config/")
-    Call<RespObject> GetListExamConfigs(@Body RequestBody reqBody);
+    Call<RespObject> GetListExamConfigs();
 
     //Get List Result of Exam
     @POST("question/list_config/")

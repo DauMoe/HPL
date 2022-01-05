@@ -51,7 +51,7 @@ public class ExamConfigActivity extends AppCompatActivity {
     }
 
     private void GetListExamConfigs(ExamAdapter adapter) {
-        Call<RespObject> g = f.GetListExamConfigs(ssid, email);
+        Call<RespObject> g = f.GetListExamConfigs();
         g.enqueue(new Callback<RespObject>() {
             @Override
             public void onResponse(Call<RespObject> call, Response<RespObject> response) {

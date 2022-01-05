@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.ArrayMap;
 import android.widget.Toast;
 
 import com.example.hpl_one.Adapter.ExamAdapter;
@@ -22,9 +23,13 @@ import com.example.hpl_one.databinding.ActivityExamConfigBinding;
 import com.example.hpl_one.databinding.ActivityResultBinding;
 import com.google.gson.Gson;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -54,7 +59,12 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     private void GetListResult(ResultAdapter adapter) {
-        Call<RespObject> g = f.GetListResults(ssid, email, roles);
+        Map<String, Object> mReq = new ArrayMap<>();
+        mReq.put("email", email);
+        RequestBody body = RequestBody
+                .create(okhttp3.MediaType.parse("application/json; charset=utf-8"), (new JSONObject(mReq)).toString());
+        APIConfig x = RetrofitConfig.JSONconfig().create(APIConfig.class);
+        Call<RespObject> g = f.GetListResults(body);
         g.enqueue(new Callback<RespObject>() {
             @Override
             public void onResponse(Call<RespObject> call, Response<RespObject> response) {

@@ -13,7 +13,5 @@ public class Config {
     public static final String USER_ID      = "user_id";
 
     //Base URL
-//    public static final String BASE_URL     = "http://135850830a76.ngrok.io/";
-    public static final String BASE_URL     = "http://192.168.0.108:8080/";
-//    public static final String BASE_URL     = "https://hplbe.herokuapp.com/";
+    public static final String BASE_URL     = "http://192.168.2.102:8081/";
 }

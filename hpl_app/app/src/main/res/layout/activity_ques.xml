@@ -19,6 +19,7 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"/>
 
+
             <TextView
                 android:id="@+id/student_ques"
                 android:layout_width="match_parent"
@@ -31,6 +32,15 @@
                 android:text="Ques1"
                 android:textColor="@color/black"
                 android:textSize="18dp" />
+            <Button
+                android:id="@+id/play_audio_question"
+                android:text="Play audio"
+                android:textAllCaps="false"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:textSize="17dp"
+                android:layout_height="wrap_content"/>
 
             <LinearLayout
                 android:orientation="vertical"
