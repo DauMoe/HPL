@@ -22,7 +22,17 @@ const InsertUserDAO = async(email, username, dob, sex, roles) => {
     });
 }
 
+const GetListStudentDAO = async() => {
+    return new Promise(function (resolve, reject) {
+        let sql = "SELECT * FROM user WHERE roles = 0";
+        conn.query(sql, [], function (err, resp) {
+            HandleResp(err, resp, reject, resolve)
+        });
+    });
+}
+
 module.exports = {
     LoginDAO: LoginDAO,
-    InsertUserDAO: InsertUserDAO
+    InsertUserDAO: InsertUserDAO,
+    GetListStudentDAO: GetListStudentDAO
 }

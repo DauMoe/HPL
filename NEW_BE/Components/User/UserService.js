@@ -1,5 +1,5 @@
 const {getString, getNumber, CustomResp, SuccessResp, Con4Java} = require("./../Common");
-const {LoginDAO, InsertUserDAO} = require("./UserDAO");
+const {LoginDAO, InsertUserDAO, GetListStudentDAO} = require("./UserDAO");
 
 const Login = async(req, resp) => {
     let reqData = req.body;
@@ -48,6 +48,30 @@ const NewUser = async(req, resp) => {
     }
 }
 
+const GetStudent = async (req, resp) => {
+    try {
+        let result = await GetListStudentDAO();
+        if (result.code === 200) {
+            let respResult = [];
+            for (let i of result.message) {
+                respResult.push({
+                    "email": Con4Java(i.email),
+                    "id": i.id,
+                    "username": Con4Java(i.username),
+                    "dob": Con4Java(i.dob),
+                    "sex": Con4Java(i.sex),
+                    "roles": i.roles
+                });
+            }
+            SuccessResp(resp, respResult);
+        } else {
+            CustomResp(resp, result.code, [Con4Java(result.message)]);
+        }
+    } catch(e) {
+        CustomResp(resp, 900, [Con4Java(e.message)]);
+    }
+}
+
 const Logout = async(req, resp) => {
     SuccessResp(resp, ["ok"]);
 }
@@ -55,5 +79,6 @@ const Logout = async(req, resp) => {
 module.exports = {
     Login: Login,
     NewUser: NewUser,
-    Logout: Logout
+    Logout: Logout,
+    GetStudent: GetStudent
 }
