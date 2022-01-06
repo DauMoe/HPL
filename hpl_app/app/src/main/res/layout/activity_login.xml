@@ -25,6 +25,7 @@
 
         <EditText
             android:id="@+id/login_email"
+            android:text="f"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/login_input"
@@ -35,6 +36,7 @@
             android:id="@+id/login_password"
             android:layout_width="match_parent"
             android:layout_height="51dp"
+            android:text="123"
             android:layout_marginTop="20dp"
             android:background="@drawable/login_input"
             android:hint="Password"

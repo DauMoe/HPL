@@ -6,6 +6,8 @@ import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -18,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.hpl_one.Config;
 import com.example.hpl_one.LoginActivity;
 import com.example.hpl_one.Modules.Question;
@@ -31,6 +34,8 @@ import com.google.gson.Gson;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Map;
 
 import okhttp3.RequestBody;
@@ -42,15 +47,15 @@ import static com.example.hpl_one.Config.BASE_URL;
 
 public class QuesActivity extends AppCompatActivity {
     private TextView ques;
-    private ImageView exittoMain;
+    private ImageView exittoMain, image_ques;
     private AppCompatButton ans_a, ans_b, ans_c, ans_d, next_ques;
-    private Button playAudio;
-    private APIConfig f;
+    private Button playAudio, stopAudio;
     private SharedPreferences pref;
     private String email, ssid, level;
     private Question x;
     private boolean isAns = false;
-    MediaPlayer mediaPlayer;
+    MediaPlayer mediaPlayer = null;
+    String URL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,42 +71,23 @@ public class QuesActivity extends AppCompatActivity {
     }
 
     private void handlerEvent() {
-        ans_a.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkAns("A");
-            }
+        playAudio.setOnClickListener(view -> PlayAudioQuestion());
+        stopAudio.setOnClickListener(view -> StopAudioQuestion());
+        ans_a.setOnClickListener(v -> checkAns("A"));
+        ans_b.setOnClickListener(v -> checkAns("B"));
+        ans_c.setOnClickListener(v -> checkAns("C"));
+        ans_d.setOnClickListener(v -> checkAns("D"));
+        next_ques.setOnClickListener(v -> {
+            showQues(email, ssid, level);
         });
-        ans_b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkAns("B");
+        exittoMain.setOnClickListener(v -> {
+            if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+                mediaPlayer.stop();
+                mediaPlayer.reset();
+                mediaPlayer.release();
             }
-        });
-        ans_c.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkAns("C");
-            }
-        });
-        ans_d.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkAns("D");
-            }
-        });
-        next_ques.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showQues(email, ssid, level);
-            }
-        });
-        exittoMain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(QuesActivity.this, StudentActivity.class));
-                finish();
-            }
+            startActivity(new Intent(QuesActivity.this, StudentActivity.class));
+            finish();
         });
     }
 
@@ -111,7 +97,6 @@ public class QuesActivity extends AppCompatActivity {
         pref        = getSharedPreferences(Config.LOGIN_STATE, MODE_PRIVATE);
         email       = pref.getString(Config.EMAIL, null);
         ssid        = pref.getString(Config.SSID, null);
-        f           = RetrofitConfig.JSONconfig().create(APIConfig.class);
         ques        = findViewById(R.id.student_ques);
         ans_a       = findViewById(R.id.ans_a);
         ans_b       = findViewById(R.id.ans_b);
@@ -119,10 +104,13 @@ public class QuesActivity extends AppCompatActivity {
         ans_d       = findViewById(R.id.ans_d);
         next_ques   = findViewById(R.id.ques_next);
         exittoMain  = findViewById(R.id.main_sc);
+        image_ques  = findViewById(R.id.image_ques);
         playAudio   = findViewById(R.id.play_audio_question);
+        stopAudio   = findViewById(R.id.stop_audio_question);
 
         playAudio.setVisibility(View.GONE);
-        playAudio.setOnClickListener(view -> PlayAudioQuestion());
+        stopAudio.setVisibility(View.GONE);
+        image_ques.setVisibility(View.GONE);
         //Get amount of ques
         isAns       = true;
         showQues(email, ssid, level);
@@ -131,26 +119,55 @@ public class QuesActivity extends AppCompatActivity {
     private void PlayAudioQuestion() {
         if (x != null) {
             Toast.makeText(getApplicationContext(), "Wait a minute!", Toast.LENGTH_LONG);
-            String URL = BASE_URL + x.getAns_path();
+            URL = BASE_URL + x.getAns_path();
             Log.e("URL", URL);
-            MediaPlayer mediaPlayer = new MediaPlayer();
+            if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+                mediaPlayer.stop();
+            }
+            mediaPlayer = new MediaPlayer();
             mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             try {
                 mediaPlayer.setDataSource(URL);
                 mediaPlayer.prepare();
+                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        playAudio.setVisibility(View.VISIBLE);
+                        stopAudio.setVisibility(View.GONE);
+                    }
+                });
                 mediaPlayer.start();
+                playAudio.setVisibility(View.GONE);
+                stopAudio.setVisibility(View.VISIBLE);
             } catch(IOException e) {
                 Log.e("AUDIO ERR", e.getMessage());
             }
         }
     }
 
+    private void StopAudioQuestion() {
+        Log.e("AUDIO", "STOP");
+        if (mediaPlayer.isPlaying()) {
+            mediaPlayer.stop();
+        }
+        playAudio.setVisibility(View.VISIBLE);
+        stopAudio.setVisibility(View.GONE);
+    }
+
     private void showQues(String email, String ssid, String level) {
-        playAudio.setVisibility(View.GONE);
         if (!isAns) {
             Toast.makeText(getApplicationContext(), "Choose an answer first!", Toast.LENGTH_SHORT).show();
             return;
         }
+        Log.e("After", "Answered");
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+            mediaPlayer.stop();
+            mediaPlayer.reset();
+            mediaPlayer.release();
+        }
+        playAudio.setVisibility(View.GONE);
+        stopAudio.setVisibility(View.GONE);
+        image_ques.setVisibility(View.GONE);
         isAns = false;
         Map<String, Object> mReq = new ArrayMap<>();
         mReq.put("level", level);
@@ -170,6 +187,9 @@ public class QuesActivity extends AppCompatActivity {
                             if (!x.getQuestion_path().isEmpty()) {
                                 //Audio doc: https://www.geeksforgeeks.org/how-to-play-audio-from-url-in-android/
                                 playAudio.setVisibility(View.VISIBLE);
+                                stopAudio.setVisibility(View.GONE);
+                                image_ques.setVisibility(View.VISIBLE);
+                                Glide.with(QuesActivity.this).load(BASE_URL + x.getQuestion_path()).into(image_ques);
                             }
                             ques.setText(x.getQuestion());
                             ans_a.setText("A. " + x.getAns_a());
