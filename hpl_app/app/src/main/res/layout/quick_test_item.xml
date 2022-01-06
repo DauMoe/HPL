@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout android:orientation="vertical"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
@@ -9,19 +11,35 @@
             android:id="@+id/test_ques"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
             android:fontFamily="@font/arial"
             android:gravity="center_vertical"
             android:text="Ques1"
             android:textColor="@color/black"
             android:textSize="18dp" />
 
+        <ImageView
+            android:id="@+id/test_image"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"/>
+
+        <Button
+            android:id="@+id/test_play_audio"
+            android:text="Play aduio"
+            android:textAllCaps="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/test_pause_audio"
+        android:text="Stop aduio"
+        android:backgroundTint="#E53935"
+        android:textAllCaps="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
         <LinearLayout
             android:orientation="vertical"
             android:gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
