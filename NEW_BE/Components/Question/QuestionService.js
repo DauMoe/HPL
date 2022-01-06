@@ -6,15 +6,16 @@ const GetSingleQuesByLevel = async(req, resp) => {
     try {
         let level       = getNumber(reqData, "level");
         let result      = await GetSingleQuestionByLevelDAO(level);
+        console.log(result);
         if (result.code === 200) {
             let i = result.message[0];
             SuccessResp(resp, [{
                 "question": i.question === null ? Con4Java("Audio question. Please listen audio and choose the correct answer") : Con4Java(i.question),
                 "question_path": i.question_path === null ? Con4Java("") : Con4Java(i.question_path),
-                "ans_a": i.ans_a === null ? Con4Java("") : Con4Java(i.ans_a),
-                "ans_b": i.ans_b === null ? Con4Java("") : Con4Java(i.ans_b),
-                "ans_c": i.ans_c === null ? Con4Java("") : Con4Java(i.ans_c),
-                "ans_d": i.ans_d === null ? Con4Java("") : Con4Java(i.ans_d),
+                "ans_a": i.ans_a === null ? Con4Java("Listen and choose the correct answer") : Con4Java(i.ans_a),
+                "ans_b": i.ans_b === null ? Con4Java("Listen and choose the correct answer") : Con4Java(i.ans_b),
+                "ans_c": i.ans_c === null ? Con4Java("Listen and choose the correct answer") : Con4Java(i.ans_c),
+                "ans_d": i.ans_d === null ? Con4Java("Listen and choose the correct answer") : Con4Java(i.ans_d),
                 "ans_path": i.ans_path === null ? Con4Java("") : Con4Java(i.ans_path),
                 "correct": i.correct_ans === null ? Con4Java(""): Con4Java(i.correct_ans)
             }]);
@@ -38,10 +39,10 @@ const CreateExamByConfig = (req, resp) => {
                     ListResp.push({
                         "question": i.question === null ? Con4Java("Listen audio and choose correct answer") : Con4Java(i.question),
                         "question_path": i.question_path === null ? Con4Java("") : Con4Java(i.question_path),
-                        "ans_a": i.ans_a === null ? Con4Java("") : Con4Java(i.ans_a),
-                        "ans_b": i.ans_b === null ? Con4Java("") : Con4Java(i.ans_b),
-                        "ans_c": i.ans_c === null ? Con4Java("") : Con4Java(i.ans_c),
-                        "ans_d": i.ans_d === null ? Con4Java("") : Con4Java(i.ans_d),
+                        "ans_a": i.ans_a === null ? Con4Java("Listen and choose the correct answer") : Con4Java(i.ans_a),
+                        "ans_b": i.ans_b === null ? Con4Java("Listen and choose the correct answer") : Con4Java(i.ans_b),
+                        "ans_c": i.ans_c === null ? Con4Java("Listen and choose the correct answer") : Con4Java(i.ans_c),
+                        "ans_d": i.ans_d === null ? Con4Java("Listen and choose the correct answer") : Con4Java(i.ans_d),
                         "ans_path": i.ans_path === null ? Con4Java("") : Con4Java(i.ans_path),
                         "correct": i.correct_ans === null ? Con4Java(""): Con4Java(i.correct_ans)
                     });

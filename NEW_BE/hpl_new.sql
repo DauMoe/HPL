@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 31, 2021 at 09:19 AM
+-- Generation Time: Jan 06, 2022 at 08:30 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.2.32
 
@@ -241,37 +241,37 @@ INSERT INTO `question_eng` (`id`, `question`, `question_path`, `ans_a`, `ans_b`,
 (242, 'It is not hot .... the winter.', NULL, 'on', 'in', 'at', 'under', 'B', '3', NULL),
 (243, 'We went to the cinema.....', NULL, 'today', 'yesterday', 'tomorrow', 'next Sunday', 'B', '3', NULL),
 (244, 'Does he .... a sore-throat?', NULL, 'has', 'had', 'have', 'having', 'C', '3', NULL),
-(276, NULL, './media/picture/0.png', NULL, NULL, NULL, NULL, NULL, '0', './media/audio/0.m4a'),
-(277, NULL, './media/picture/1.png', NULL, NULL, NULL, NULL, NULL, '0', './media/audio/1.m4a'),
-(278, NULL, './media/picture/2.png', NULL, NULL, NULL, NULL, NULL, '0', './media/audio/2.m4a'),
-(279, NULL, './media/picture/3.png', NULL, NULL, NULL, NULL, NULL, '0', './media/audio/3.m4a'),
-(280, NULL, './media/picture/4.png', NULL, NULL, NULL, NULL, NULL, '0', './media/audio/4.m4a'),
-(281, NULL, './media/picture/5.png', NULL, NULL, NULL, NULL, NULL, '0', './media/audio/5.m4a'),
-(282, NULL, './media/picture/6.png', NULL, NULL, NULL, NULL, NULL, '0', './media/audio/6.m4a'),
-(283, NULL, './media/picture/7.png', NULL, NULL, NULL, NULL, NULL, '0', './media/audio/7.m4a'),
-(284, NULL, './media/picture/8.png', NULL, NULL, NULL, NULL, NULL, '0', './media/audio/8.m4a'),
-(285, NULL, './media/picture/9.png', NULL, NULL, NULL, NULL, NULL, '0', './media/audio/9.m4a'),
-(286, NULL, './media/picture/10.png', NULL, NULL, NULL, NULL, NULL, '0', './media/audio/10.m4a'),
-(287, NULL, './media/picture/11.png', NULL, NULL, NULL, NULL, NULL, '0', './media/audio/11.m4a'),
-(288, NULL, './media/picture/12.png', NULL, NULL, NULL, NULL, NULL, '0', './media/audio/12.m4a'),
-(289, NULL, './media/picture/13.png', NULL, NULL, NULL, NULL, NULL, '0', './media/audio/13.m4a'),
-(290, NULL, './media/picture/14.png', NULL, NULL, NULL, NULL, NULL, '0', './media/audio/14.m4a'),
-(291, NULL, './media/picture/15.png', NULL, NULL, NULL, NULL, NULL, '0', './media/audio/15.m4a'),
-(292, NULL, './media/picture/16.png', NULL, NULL, NULL, NULL, NULL, '0', './media/audio/16.m4a'),
-(293, NULL, './media/picture/17.png', NULL, NULL, NULL, NULL, NULL, '0', './media/audio/17.m4a'),
-(294, NULL, './media/picture/18.png', NULL, NULL, NULL, NULL, NULL, '0', './media/audio/18.m4a'),
-(295, NULL, './media/picture/19.png', NULL, NULL, NULL, NULL, NULL, '0', './media/audio/19.m4a'),
-(296, NULL, './media/picture/20.png', NULL, NULL, NULL, NULL, NULL, '0', './media/audio/20.m4a'),
-(297, NULL, './media/picture/21.png', NULL, NULL, NULL, NULL, NULL, '0', './media/audio/21.m4a'),
-(298, NULL, './media/picture/22.png', NULL, NULL, NULL, NULL, NULL, '0', './media/audio/22.m4a'),
-(299, NULL, './media/picture/23.png', NULL, NULL, NULL, NULL, NULL, '0', './media/audio/23.m4a'),
-(300, NULL, './media/picture/24.png', NULL, NULL, NULL, NULL, NULL, '0', './media/audio/24.m4a'),
-(301, NULL, './media/picture/25.png', NULL, NULL, NULL, NULL, NULL, '0', './media/audio/25.m4a'),
-(302, NULL, './media/picture/26.png', NULL, NULL, NULL, NULL, NULL, '0', './media/audio/26.m4a'),
-(303, NULL, './media/picture/27.png', NULL, NULL, NULL, NULL, NULL, '0', './media/audio/27.m4a'),
-(304, NULL, './media/picture/28.png', NULL, NULL, NULL, NULL, NULL, '0', './media/audio/28.m4a'),
-(305, NULL, './media/picture/29.png', NULL, NULL, NULL, NULL, NULL, '0', './media/audio/29.m4a'),
-(306, NULL, './media/picture/30.png', NULL, NULL, NULL, NULL, NULL, '0', './media/audio/30.m4a');
+(462, NULL, 'media/picture/pic0.png', NULL, NULL, NULL, NULL, 'D', '1', 'media/audio/0.m4a'),
+(463, NULL, 'media/picture/pic1.png', NULL, NULL, NULL, NULL, 'C', '1', 'media/audio/1.m4a'),
+(464, NULL, 'media/picture/pic2.png', NULL, NULL, NULL, NULL, 'A', '1', 'media/audio/2.m4a'),
+(465, NULL, 'media/picture/pic3.png', NULL, NULL, NULL, NULL, 'D', '1', 'media/audio/3.m4a'),
+(466, NULL, 'media/picture/pic4.png', NULL, NULL, NULL, NULL, 'B', '1', 'media/audio/4.m4a'),
+(467, NULL, 'media/picture/pic5.png', NULL, NULL, NULL, NULL, 'C', '1', 'media/audio/5.m4a'),
+(468, NULL, 'media/picture/pic6.png', NULL, NULL, NULL, NULL, 'C', '1', 'media/audio/6.m4a'),
+(469, NULL, 'media/picture/pic7.png', NULL, NULL, NULL, NULL, 'B', '1', 'media/audio/7.m4a'),
+(470, NULL, 'media/picture/pic8.png', NULL, NULL, NULL, NULL, 'C', '1', 'media/audio/8.m4a'),
+(471, NULL, 'media/picture/pic9.png', NULL, NULL, NULL, NULL, 'D', '1', 'media/audio/9.m4a'),
+(472, NULL, 'media/picture/pic10.png', NULL, NULL, NULL, NULL, 'B', '1', 'media/audio/10.m4a'),
+(473, NULL, 'media/picture/pic11.png', NULL, NULL, NULL, NULL, 'C', '1', 'media/audio/11.m4a'),
+(474, NULL, 'media/picture/pic12.png', NULL, NULL, NULL, NULL, 'A', '1', 'media/audio/12.m4a'),
+(475, NULL, 'media/picture/pic13.png', NULL, NULL, NULL, NULL, 'C', '1', 'media/audio/13.m4a'),
+(476, NULL, 'media/picture/pic14.png', NULL, NULL, NULL, NULL, 'C', '1', 'media/audio/14.m4a'),
+(477, NULL, 'media/picture/pic15.png', NULL, NULL, NULL, NULL, 'B', '1', 'media/audio/15.m4a'),
+(478, NULL, 'media/picture/pic16.png', NULL, NULL, NULL, NULL, 'B', '1', 'media/audio/16.m4a'),
+(479, NULL, 'media/picture/pic17.png', NULL, NULL, NULL, NULL, 'D', '1', 'media/audio/17.m4a'),
+(480, NULL, 'media/picture/pic18.png', NULL, NULL, NULL, NULL, 'A', '1', 'media/audio/18.m4a'),
+(481, NULL, 'media/picture/pic19.png', NULL, NULL, NULL, NULL, 'A', '1', 'media/audio/19.m4a'),
+(482, NULL, 'media/picture/pic20.png', NULL, NULL, NULL, NULL, 'B', '1', 'media/audio/20.m4a'),
+(483, NULL, 'media/picture/pic21.png', NULL, NULL, NULL, NULL, 'A', '1', 'media/audio/21.m4a'),
+(484, NULL, 'media/picture/pic22.png', NULL, NULL, NULL, NULL, 'B', '1', 'media/audio/22.m4a'),
+(485, NULL, 'media/picture/pic23.png', NULL, NULL, NULL, NULL, 'C', '1', 'media/audio/23.m4a'),
+(486, NULL, 'media/picture/pic24.png', NULL, NULL, NULL, NULL, 'D', '1', 'media/audio/24.m4a'),
+(487, NULL, 'media/picture/pic25.png', NULL, NULL, NULL, NULL, 'C', '1', 'media/audio/25.m4a'),
+(488, NULL, 'media/picture/pic26.png', NULL, NULL, NULL, NULL, 'C', '1', 'media/audio/26.m4a'),
+(489, NULL, 'media/picture/pic27.png', NULL, NULL, NULL, NULL, 'A', '1', 'media/audio/27.m4a'),
+(490, NULL, 'media/picture/pic28.png', NULL, NULL, NULL, NULL, 'A', '1', 'media/audio/28.m4a'),
+(491, NULL, 'media/picture/pic29.png', NULL, NULL, NULL, NULL, 'B', '1', 'media/audio/29.m4a'),
+(492, NULL, 'media/picture/pic30.png', NULL, NULL, NULL, NULL, 'D', '1', 'media/audio/30.m4a');
 
 -- --------------------------------------------------------
 
@@ -385,7 +385,7 @@ ALTER TABLE `exam_result`
 -- AUTO_INCREMENT for table `question_eng`
 --
 ALTER TABLE `question_eng`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT COMMENT 'question id', AUTO_INCREMENT=307;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT COMMENT 'question id', AUTO_INCREMENT=493;
 
 --
 -- AUTO_INCREMENT for table `user`
