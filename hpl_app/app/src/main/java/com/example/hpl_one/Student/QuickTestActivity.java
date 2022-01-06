@@ -119,11 +119,13 @@ public class QuickTestActivity extends AppCompatActivity implements OnOptionSele
         }
         Map<String, Object> mReq = new ArrayMap<>();
         mReq.put("email", email);
-        mReq.put("password", password);
+        mReq.put("result", correctTotal + "/" + data.size());
+        mReq.put("starttime", starttime);
+        mReq.put("endtime", endtime);
         RequestBody body = RequestBody
                 .create(okhttp3.MediaType.parse("application/json; charset=utf-8"), (new JSONObject(mReq)).toString());
         APIConfig x = RetrofitConfig.JSONconfig().create(APIConfig.class);
-        Call<ResponseBody> g = f.Submit(ssid, email, starttime, endtime, String.valueOf(correctTotal+"/"+data.size()));
+        Call<ResponseBody> g = x.Submit(body);
         g.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -192,8 +194,12 @@ public class QuickTestActivity extends AppCompatActivity implements OnOptionSele
     }
 
     private void GetListExam(QuickTestAdapter adapter) {
-        Call<RespObject> g = f.GetExam(ssid, email, exam_id);
-//        Call<RespObject> g = f.GetExam(ssid, email, "1");
+        Map<String, Object> mReq = new ArrayMap<>();
+        mReq.put("id", exam_id);
+        RequestBody body = RequestBody
+                .create(okhttp3.MediaType.parse("application/json; charset=utf-8"), (new JSONObject(mReq)).toString());
+        APIConfig f = RetrofitConfig.JSONconfig().create(APIConfig.class);
+        Call<RespObject> g = f.GetExam(body);
         g.enqueue(new Callback<RespObject>() {
             @Override
             public void onResponse(Call<RespObject> call, Response<RespObject> response) {

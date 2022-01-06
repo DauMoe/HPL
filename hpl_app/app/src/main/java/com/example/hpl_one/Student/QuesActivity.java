@@ -7,6 +7,8 @@ import androidx.core.content.ContextCompat;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.ArrayMap;
 import android.util.Log;
@@ -28,6 +30,7 @@ import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.Map;
 
 import okhttp3.RequestBody;
@@ -47,6 +50,7 @@ public class QuesActivity extends AppCompatActivity {
     private String email, ssid, level;
     private Question x;
     private boolean isAns = false;
+    MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,10 +122,27 @@ public class QuesActivity extends AppCompatActivity {
         playAudio   = findViewById(R.id.play_audio_question);
 
         playAudio.setVisibility(View.GONE);
-
+        playAudio.setOnClickListener(view -> PlayAudioQuestion());
         //Get amount of ques
         isAns       = true;
         showQues(email, ssid, level);
+    }
+
+    private void PlayAudioQuestion() {
+        if (x != null) {
+            Toast.makeText(getApplicationContext(), "Wait a minute!", Toast.LENGTH_LONG);
+            String URL = BASE_URL + x.getAns_path();
+            Log.e("URL", URL);
+            MediaPlayer mediaPlayer = new MediaPlayer();
+            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            try {
+                mediaPlayer.setDataSource(URL);
+                mediaPlayer.prepare();
+                mediaPlayer.start();
+            } catch(IOException e) {
+                Log.e("AUDIO ERR", e.getMessage());
+            }
+        }
     }
 
     private void showQues(String email, String ssid, String level) {
@@ -143,22 +164,23 @@ public class QuesActivity extends AppCompatActivity {
             public void onResponse(Call<RespObject> call, Response<RespObject> response) {
                 if (response.isSuccessful()) {
                     if (response.body().getCode() == 200) {
-                        Log.e("PATH", x.getQuestion_path());
-                        if (!x.getQuestion_path().isEmpty()) {
-                            playAudio.setVisibility(View.VISIBLE);
-                            String URL = BASE_URL + x.getQuestion_path().substring(1);
-                            Log.e("URL", URL);
-                        }
                         x = new Gson().fromJson(response.body().getMsg().get(0).toString(), Question.class);
-                        ques.setText(x.getQuestion());
-                        ans_a.setText("A. "+x.getAns_a());
-                        ans_b.setText("B. "+x.getAns_b());
-                        ans_c.setText("C. "+x.getAns_c());
-                        ans_d.setText("D. "+x.getAns_d());
-                        ans_a.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ans));
-                        ans_b.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ans));
-                        ans_c.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ans));
-                        ans_d.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ans));
+                        if (x != null) {
+                            Log.e("PATH", x.getQuestion_path());
+                            if (!x.getQuestion_path().isEmpty()) {
+                                //Audio doc: https://www.geeksforgeeks.org/how-to-play-audio-from-url-in-android/
+                                playAudio.setVisibility(View.VISIBLE);
+                            }
+                            ques.setText(x.getQuestion());
+                            ans_a.setText("A. " + x.getAns_a());
+                            ans_b.setText("B. " + x.getAns_b());
+                            ans_c.setText("C. " + x.getAns_c());
+                            ans_d.setText("D. " + x.getAns_d());
+                            ans_a.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ans));
+                            ans_b.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ans));
+                            ans_c.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ans));
+                            ans_d.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.ans));
+                        }
                     } else {
                         Log.e("QuesActivityCODE", response.body().getMsg().get(0).toString());
                         Toast.makeText(getApplicationContext(), "QuesActivity Error Code: " + response.body().getCode(), Toast.LENGTH_LONG);

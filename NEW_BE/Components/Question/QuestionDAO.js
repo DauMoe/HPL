@@ -6,7 +6,7 @@ const conn = mysql.createConnection(DB_CONFIG);
 
 const GetSingleQuestionByLevelDAO = async (level) => {
     return new Promise(function (resolve, reject) {
-        let sql = "SELECT * FROM question_eng WHERE level = ? ORDER BY RAND() LIMIT 1";
+        let sql = "SELECT * FROM question_eng WHERE level = ? AND question_path IS NOT NULL ORDER BY RAND() LIMIT 1";
         conn.query(sql, [level], function (err, resp) {
             HandleResp(err, resp, reject, resolve)
         });

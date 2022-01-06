@@ -45,7 +45,7 @@ public interface APIConfig {
 
     //Create new result
     @POST("question/new_result/")
-    Call<RespObject> Submit(@Body RequestBody reqBody);
+    Call<ResponseBody> Submit(@Body RequestBody reqBody);
 
     //Get Single Question
     @POST("question/single/")

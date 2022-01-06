@@ -71,7 +71,7 @@ public class TestRetrofit extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Question> call, Response<Question> response) {
                         if (response.isSuccessful()) {
-                            show.setText(response.body().getQues()+"\nA. "+response.body().getAnswer_a());
+                            show.setText(response.body().getQuestion()+"\nA. "+response.body().getAns_b());
                         }
                     }
 
