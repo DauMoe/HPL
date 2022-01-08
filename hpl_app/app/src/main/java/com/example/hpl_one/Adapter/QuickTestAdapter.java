@@ -56,9 +56,26 @@ public class QuickTestAdapter extends RecyclerView.Adapter<QuickTestAdapter.Quic
         if (!item.getQuestion_path().isEmpty()) {
             ques_path = BASE_URL + item.getQuestion_path();
             audio_path = BASE_URL + item.getAns_path();
+            holder.image_ques.setVisibility(View.VISIBLE);
+            Glide.with(context).load(ques_path).into(holder.image_ques);
+            mediaPlayer = new MediaPlayer();
+            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            try {
+                mediaPlayer.setDataSource(audio_path);
+                mediaPlayer.prepare();
+                mediaPlayer.setOnCompletionListener(mp -> {
+                    holder.playAdudio.setVisibility(View.VISIBLE);
+                    holder.stopAudio.setVisibility(View.GONE);
+                });
+                holder.playAdudio.setVisibility(View.VISIBLE);
+                holder.stopAudio.setVisibility(View.GONE);
+            } catch (IOException e) {
+                Log.e("QUICKTEST ERR", e.getMessage());
+            }
         } else {
-            ques_path = "";
-            audio_path = "";
+            holder.playAdudio.setVisibility(View.GONE);
+            holder.stopAudio.setVisibility(View.GONE);
+            holder.image_ques.setVisibility(View.GONE);
         }
 
         holder.test_ques.setText((position+1)+". "+item.getQuestion());
@@ -66,21 +83,6 @@ public class QuickTestAdapter extends RecyclerView.Adapter<QuickTestAdapter.Quic
         holder.test_ans_b.setText("B. "+item.getAns_b());
         holder.test_ans_c.setText("C. "+item.getAns_c());
         holder.test_ans_d.setText("D. "+item.getAns_d());
-        Glide.with(context).load(ques_path).into(holder.image_ques);
-        mediaPlayer = new MediaPlayer();
-        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        try {
-            mediaPlayer.setDataSource(audio_path);
-            mediaPlayer.prepare();
-            mediaPlayer.setOnCompletionListener(mp -> {
-                holder.playAdudio.setVisibility(View.VISIBLE);
-                holder.stopAudio.setVisibility(View.GONE);
-            });
-            holder.playAdudio.setVisibility(View.GONE);
-            holder.stopAudio.setVisibility(View.VISIBLE);
-        } catch (IOException e) {
-            Log.e("QUICKTEST ERR", e.getMessage());
-        }
 
         holder.test_ans_a.setChecked(item.isAnsA());
         holder.test_ans_b.setChecked(item.isAnsB());
@@ -118,7 +120,6 @@ public class QuickTestAdapter extends RecyclerView.Adapter<QuickTestAdapter.Quic
             playAdudio  = itemView.findViewById(R.id.test_play_audio);
             stopAudio   = itemView.findViewById(R.id.test_pause_audio);
 
-
             test_ans_a.setOnClickListener(this);
             test_ans_b.setOnClickListener(this);
             test_ans_c.setOnClickListener(this);
@@ -143,6 +144,8 @@ public class QuickTestAdapter extends RecyclerView.Adapter<QuickTestAdapter.Quic
                     onOptionSelected.AnsSelected(getAdapterPosition(), 4);
                     break;
                 case R.id.test_play_audio:
+                    playAdudio.setVisibility(View.GONE);
+                    stopAudio.setVisibility(View.VISIBLE);
                     mediaPlayer.start();
                     break;
                 case R.id.test_pause_audio:

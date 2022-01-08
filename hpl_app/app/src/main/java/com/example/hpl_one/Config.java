@@ -13,5 +13,5 @@ public class Config {
     public static final String USER_ID      = "user_id";
 
     //Base URL
-    public static final String BASE_URL     = "http://192.168.1.4:8081/";
+    public static final String BASE_URL     = "http://192.168.2.101:8081/";
 }

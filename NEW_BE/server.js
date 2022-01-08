@@ -13,7 +13,10 @@ app.use(express.static("./public"));
 app.use(cors());
 app.use(express.json());
 
-// app.use("/exam", ExamRouter);
+app.get("/test", function(req, resp) {
+    resp.send("hi");
+})
+
 app.use("/user", UserRouter.x);
 app.use("/question", QuestionRouter.x);
 app.use("/structure", StructureRouter.x);
