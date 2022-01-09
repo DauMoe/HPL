@@ -1,0 +1,330 @@
+{
+	"info": {
+		"_postman_id": "f5e3a4a1-26e6-49dd-a36b-3f287f34b6eb",
+		"name": "NEW_HPL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"a\",\r\n    \"password\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/user/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/user/logout",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"test\",\r\n    \"username\": \"anv\",\r\n    \"roles\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/user/new_user",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"new_user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get List Student",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/user/get_student",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"user",
+								"get_student"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Question",
+			"item": [
+				{
+					"name": "Get Single Question",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"level\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/question/single",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"question",
+								"single"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get List Questions of Exam",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/question/exam",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"question",
+								"exam"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get List Exam Config",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/question/list_config",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"question",
+								"list_config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Result of Exam",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"a\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/question/list_result",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"question",
+								"list_result"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New result",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"a\",\r\n    \"result\": \"12/42\",\r\n    \"starttime\": \"24.124.42\",\r\n    \"endtime\": \"24.124.42\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/question/new_result",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"question",
+								"new_result"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Structure",
+			"item": [
+				{
+					"name": "Get Structure's Info",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/structure/info",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"structure",
+								"info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get random structure",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/structure/random",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"structure",
+								"random"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search by structure name",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"q\": \"prefer\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/structure/search",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"structure",
+								"search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all structure",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/structure/all",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"structure",
+								"all"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

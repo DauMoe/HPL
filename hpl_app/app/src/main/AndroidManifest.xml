@@ -3,7 +3,7 @@
     package="com.example.hpl_one">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Hpl_one">
-        <activity android:name=".Admin.StudentsActivity"/>
+        <activity android:name=".Student.StructureDetailActivity"></activity>
+        <activity android:name=".Student.StructureActivity" />
+        <activity android:name=".Admin.StudentsActivity" />
         <activity android:name=".Admin.ResultActivity" />
         <activity android:name=".Admin.ExamConfigActivity" />
         <activity android:name=".Admin.AdminActivity" />
@@ -22,17 +24,16 @@
         <activity android:name=".Student.QuesActivity" />
         <activity android:name=".LoadingActivity">
 
-<!--             <intent-filter>-->
-<!--             <action android:name="android.intent.action.MAIN" />-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
 
 
-<!--             <category android:name="android.intent.category.LAUNCHER" />-->
-<!--             </intent-filter>-->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>

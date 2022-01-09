@@ -46,6 +46,7 @@ import retrofit2.Response;
 import static com.example.hpl_one.Config.BASE_URL;
 
 public class QuesActivity extends AppCompatActivity {
+    //Doc: https://viblo.asia/p/mediaplayer-trong-lap-trinh-android-bJzKmyDBK9N
     private TextView ques;
     private ImageView exittoMain, image_ques;
     private AppCompatButton ans_a, ans_b, ans_c, ans_d, next_ques;
@@ -81,10 +82,9 @@ public class QuesActivity extends AppCompatActivity {
             showQues(email, ssid, level);
         });
         exittoMain.setOnClickListener(v -> {
-            if (mediaPlayer != null && mediaPlayer.isPlaying()) {
-                mediaPlayer.stop();
+            if (mediaPlayer != null) {
                 mediaPlayer.reset();
-                mediaPlayer.release();
+//                mediaPlayer.release();
             }
             startActivity(new Intent(QuesActivity.this, StudentActivity.class));
             finish();
@@ -121,21 +121,16 @@ public class QuesActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Wait a minute!", Toast.LENGTH_LONG);
             URL = BASE_URL + x.getAns_path();
             Log.e("URL", URL);
-            if (mediaPlayer != null && mediaPlayer.isPlaying()) {
-                mediaPlayer.stop();
-            }
             mediaPlayer = new MediaPlayer();
             mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             try {
                 mediaPlayer.setDataSource(URL);
                 mediaPlayer.prepare();
-                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        playAudio.setVisibility(View.VISIBLE);
-                        stopAudio.setVisibility(View.GONE);
-                    }
+                mediaPlayer.setOnCompletionListener(mp -> {
+                    playAudio.setVisibility(View.VISIBLE);
+                    stopAudio.setVisibility(View.GONE);
                 });
+                mediaPlayer.seekTo(x.getCurrentLength());
                 mediaPlayer.start();
                 playAudio.setVisibility(View.GONE);
                 stopAudio.setVisibility(View.VISIBLE);
@@ -148,7 +143,8 @@ public class QuesActivity extends AppCompatActivity {
     private void StopAudioQuestion() {
         Log.e("AUDIO", "STOP");
         if (mediaPlayer.isPlaying()) {
-            mediaPlayer.stop();
+            mediaPlayer.pause();
+            x.setCurrentLength(mediaPlayer.getCurrentPosition());
         }
         playAudio.setVisibility(View.VISIBLE);
         stopAudio.setVisibility(View.GONE);
@@ -160,9 +156,9 @@ public class QuesActivity extends AppCompatActivity {
             return;
         }
         Log.e("After", "Answered");
-        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
-            mediaPlayer.stop();
-            mediaPlayer.reset();
+        if (mediaPlayer != null) {
+//            mediaPlayer.stop();
+            Log.e("STATE", "IDLE");
             mediaPlayer.release();
         }
         playAudio.setVisibility(View.GONE);
@@ -185,7 +181,6 @@ public class QuesActivity extends AppCompatActivity {
                         if (x != null) {
                             Log.e("PATH", x.getQuestion_path());
                             if (!x.getQuestion_path().isEmpty()) {
-                                //Audio doc: https://www.geeksforgeeks.org/how-to-play-audio-from-url-in-android/
                                 playAudio.setVisibility(View.VISIBLE);
                                 stopAudio.setVisibility(View.GONE);
                                 image_ques.setVisibility(View.VISIBLE);

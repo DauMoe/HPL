@@ -29,7 +29,6 @@ import static com.example.hpl_one.Config.BASE_URL;
 public class QuickTestAdapter extends RecyclerView.Adapter<QuickTestAdapter.QuickTestViewHolder> {
     private Context context;
     private List<QuickTest> data;
-    MediaPlayer mediaPlayer;
     String ques_path, audio_path;
 
     public QuickTestAdapter(Context context) {
@@ -58,17 +57,36 @@ public class QuickTestAdapter extends RecyclerView.Adapter<QuickTestAdapter.Quic
             audio_path = BASE_URL + item.getAns_path();
             holder.image_ques.setVisibility(View.VISIBLE);
             Glide.with(context).load(ques_path).into(holder.image_ques);
-            mediaPlayer = new MediaPlayer();
-            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             try {
+                MediaPlayer mediaPlayer = new MediaPlayer();
+                mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
                 mediaPlayer.setDataSource(audio_path);
                 mediaPlayer.prepare();
-                mediaPlayer.setOnCompletionListener(mp -> {
+                if (!mediaPlayer.isPlaying()) {
+                    holder.playAdudio.setVisibility(View.VISIBLE);
+                    holder.stopAudio.setVisibility(View.GONE);
+                } else {
+                    holder.playAdudio.setVisibility(View.GONE);
+                    holder.stopAudio.setVisibility(View.VISIBLE);
+                }
+                holder.playAdudio.setOnClickListener(view -> {
+                    holder.playAdudio.setVisibility(View.GONE);
+                    holder.stopAudio.setVisibility(View.VISIBLE);
+                    mediaPlayer.seekTo(item.getCurrentLength());
+                    mediaPlayer.start();
+                });
+                holder.stopAudio.setOnClickListener(v -> {
+                    if (mediaPlayer.isPlaying()) {
+                        mediaPlayer.pause();
+                        item.setCurrentLength(mediaPlayer.getCurrentPosition());
+                    }
                     holder.playAdudio.setVisibility(View.VISIBLE);
                     holder.stopAudio.setVisibility(View.GONE);
                 });
-                holder.playAdudio.setVisibility(View.VISIBLE);
-                holder.stopAudio.setVisibility(View.GONE);
+                mediaPlayer.setOnCompletionListener(v -> {
+                    holder.playAdudio.setVisibility(View.VISIBLE);
+                    holder.stopAudio.setVisibility(View.GONE);
+                });
             } catch (IOException e) {
                 Log.e("QUICKTEST ERR", e.getMessage());
             }
@@ -142,19 +160,6 @@ public class QuickTestAdapter extends RecyclerView.Adapter<QuickTestAdapter.Quic
                     break;
                 case R.id.qtest_ans_d:
                     onOptionSelected.AnsSelected(getAdapterPosition(), 4);
-                    break;
-                case R.id.test_play_audio:
-                    playAdudio.setVisibility(View.GONE);
-                    stopAudio.setVisibility(View.VISIBLE);
-                    mediaPlayer.start();
-                    break;
-                case R.id.test_pause_audio:
-                    Log.e("QUICKTEST AUDIO", "STOP");
-                    if (mediaPlayer.isPlaying()) {
-                        mediaPlayer.stop();
-                    }
-                    playAdudio.setVisibility(View.VISIBLE);
-                    stopAudio.setVisibility(View.GONE);
                     break;
             }
         }

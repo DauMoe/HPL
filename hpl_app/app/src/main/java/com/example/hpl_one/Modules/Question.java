@@ -1,11 +1,11 @@
 package com.example.hpl_one.Modules;
 
 public class Question {
-    private int ID;
+    private int ID, CurrentLength;
     private String question, ans_a, ans_b, ans_c, ans_d, correct, question_path, ans_path;
 
     public Question() {
-
+        CurrentLength = 0;
     }
 
     public Question(int ID, String question, String ans_a, String ans_b, String ans_c, String ans_d, String correct, String question_path, String ans_path) {
@@ -18,6 +18,14 @@ public class Question {
         this.correct = correct;
         this.question_path = question_path;
         this.ans_path = ans_path;
+    }
+
+    public int getCurrentLength() {
+        return CurrentLength;
+    }
+
+    public void setCurrentLength(int currentLength) {
+        CurrentLength = currentLength;
     }
 
     public int getID() {

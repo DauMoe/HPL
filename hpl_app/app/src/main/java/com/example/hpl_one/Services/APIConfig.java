@@ -53,7 +53,7 @@ public interface APIConfig {
 
     //Get List Structure
     @POST("structure/all/")
-    Call<RespObject> GetListStructure(@Body RequestBody reqBody);
+    Call<RespObject> GetListStructure();
 
     //Detail Structure Info
     @POST("structure/info/")

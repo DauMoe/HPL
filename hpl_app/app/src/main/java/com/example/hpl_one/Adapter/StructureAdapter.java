@@ -2,6 +2,7 @@ package com.example.hpl_one.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,22 +13,23 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hpl_one.Modules.Exam;
+import com.example.hpl_one.Modules.Structure;
 import com.example.hpl_one.R;
 import com.example.hpl_one.Student.QuickTestActivity;
+import com.example.hpl_one.Student.StructureActivity;
+import com.example.hpl_one.Student.StructureDetailActivity;
 
 import java.util.List;
 
-public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ExamViewHolder> {
-    private List<Exam> data;
+public class StructureAdapter extends RecyclerView.Adapter<StructureAdapter.ExamViewHolder> {
+    private List<Structure> data;
     private Context context;
-    boolean isClickable = false;
 
-    public ExamAdapter(Context context, boolean isClickable) {
-        this.context        = context;
-        this.isClickable    = isClickable;
+    public StructureAdapter(Context context) {
+        this.context = context;
     }
 
-    public void setData(List<Exam> data) {
+    public void setData(List<Structure> data) {
         this.data = data;
         notifyDataSetChanged();
     }
@@ -41,20 +43,18 @@ public class ExamAdapter extends RecyclerView.Adapter<ExamAdapter.ExamViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ExamViewHolder holder, int position) {
-        Exam item = data.get(position);
+        Structure item = data.get(position);
         if (item == null) return;
-        holder.exam_name.setText(item.getName());
-        holder.exam_desc.setText("Easy: "+item.getNum_easy()+" questions\nMeidum: "+item.getNum_medium()+" questions\nHard: "+item.getNum_hard()+" questions\nTime: "+item.getTime_exam() + " mins");
-        if (isClickable) {
-            holder.exam.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent ques = new Intent(context, QuickTestActivity.class);
-                    ques.putExtra("exam_id", String.valueOf(item.getId()));
-                    context.startActivity(ques);
-                }
-            });
-        }
+        holder.exam_name.setText(item.getName_struct());
+        holder.exam_name.setTextSize(17);
+        holder.exam_desc.setText("");
+        holder.exam_desc.setVisibility(View.GONE);
+        holder.exam.setOnClickListener(v -> {
+            Intent ques = new Intent(context, StructureDetailActivity.class);
+            Log.e("SEND", String.valueOf(item.getId()));
+            ques.putExtra("structure_id", item.getId());
+            context.startActivity(ques);
+        });
     }
 
     @Override

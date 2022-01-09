@@ -34,7 +34,7 @@ const CreateExamByConfig = (req, resp) => {
         CreateExamByConfigDAO(ExamConfigID, function (result) {
             if (result.code === 200) {
                 let ListResp = [];
-                // console.log("Service: " + result.message.length);
+                console.log(result);
                 for (let i of result.message) {
                     ListResp.push({
                         "question": i.question === null ? Con4Java("Listen audio and choose correct answer") : Con4Java(i.question),
@@ -51,7 +51,7 @@ const CreateExamByConfig = (req, resp) => {
                 resp.json({
                     code: 200,
                     msg: ListResp,
-                    total: ListResp.length
+                    total: result.total
                 });
             } else {
                 CustomResp(resp, result.code, [Con4Java(result.message)]);

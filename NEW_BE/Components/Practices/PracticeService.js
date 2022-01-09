@@ -47,7 +47,7 @@ const GetDetailStructure = async(req, resp) => {
         if (result.code === 200) {
             let i = result.message[0];
             i.name_struct = Con4Java(i.name_struct);
-            i.struct_eng = Con4Java(i.struct_eng);
+            i.structure_eng = Con4Java(i.structure_eng);
             i.mean_exam = Con4Java(i.mean_exam);
             SuccessResp(resp, [i]);
         } else {

@@ -24,7 +24,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class StudentActivity extends AppCompatActivity {
-    private AppCompatButton easy, medium, difficult, quick_test;
+    private AppCompatButton easy, medium, difficult, quick_test, structure;
     private TextView student_preview_name;
     private SharedPreferences pref;
     private ImageView logout;
@@ -49,6 +49,7 @@ public class StudentActivity extends AppCompatActivity {
         medium                  = findViewById(R.id.medium);
         difficult               = findViewById(R.id.difficult);
         quick_test              = findViewById(R.id.quick_test);
+        structure               = findViewById(R.id.structure);
         student_preview_name    = findViewById(R.id.student_preview_name);
         logout                  = findViewById(R.id.logout);
         pref                    = getSharedPreferences(Config.LOGIN_STATE, MODE_PRIVATE);
@@ -58,62 +59,42 @@ public class StudentActivity extends AppCompatActivity {
         String username         =  pref.getString(Config.USER, null);
 
         Log.i("USERNAME", pref.getString(Config.USER, null));
-        student_preview_name.setText(String.valueOf("Hi, "+username+"!"));
+        student_preview_name.setText("Hi, " + username + "!");
     }
 
     private void handlerEvent() {
         Intent ques_intent = new Intent(StudentActivity.this, PrepareActivity.class);
-        easy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ques_intent.putExtra("level", "1");
-                startActivity(ques_intent);
-            }
+        easy.setOnClickListener(v -> {
+            ques_intent.putExtra("level", "1");
+            startActivity(ques_intent);
         });
-
-        medium.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ques_intent.putExtra("level", "2");
-                startActivity(ques_intent);
-            }
+        medium.setOnClickListener(v -> {
+            ques_intent.putExtra("level", "2");
+            startActivity(ques_intent);
         });
-
-        difficult.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ques_intent.putExtra("level", "3");
-                startActivity(ques_intent);
-            }
+        difficult.setOnClickListener(v -> {
+            ques_intent.putExtra("level", "3");
+            startActivity(ques_intent);
         });
+        quick_test.setOnClickListener(v -> startActivity(new Intent(StudentActivity.this, PickExamActivity.class)));
+        structure.setOnClickListener(v -> startActivity(new Intent(StudentActivity.this, StructureActivity.class)));
+        logout.setOnClickListener(v -> {
+            Toast.makeText(getApplicationContext(), "Wait a minute!", Toast.LENGTH_SHORT).show();
+            Call g = f.logout();
+            g.enqueue(new Callback() {
+                @Override
+                public void onResponse(Call call, Response response) {
+                    Toast.makeText(getApplicationContext(), "Logout!", Toast.LENGTH_SHORT).show();
+                    pref.edit().clear().apply();
+                    startActivity(new Intent(StudentActivity.this, LoginActivity.class));
+                    finish();
+                }
 
-        quick_test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(StudentActivity.this, PickExamActivity.class));
-            }
-        });
-
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Wait a minute!", Toast.LENGTH_SHORT).show();
-                Call g = f.logout();
-                g.enqueue(new Callback() {
-                    @Override
-                    public void onResponse(Call call, Response response) {
-                        Toast.makeText(getApplicationContext(), "Logout!", Toast.LENGTH_SHORT).show();
-                        pref.edit().clear().apply();
-                        startActivity(new Intent(StudentActivity.this, LoginActivity.class));
-                        finish();
-                    }
-
-                    @Override
-                    public void onFailure(Call call, Throwable t) {
-                        Toast.makeText(getApplicationContext(), "Unknow error", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
+                @Override
+                public void onFailure(Call call, Throwable t) {
+                    Toast.makeText(getApplicationContext(), "Unknow error", Toast.LENGTH_SHORT).show();
+                }
+            });
         });
     }
 }

@@ -78,6 +78,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/linear_gradient_button"
         android:maxWidth="350dp"
+        android:textAllCaps="false"
         android:text="Login"
         android:textColor="@color/white"
         android:textSize="20dp"

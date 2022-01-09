@@ -43,13 +43,13 @@ public class PrepareActivity extends AppCompatActivity {
         level = Integer.valueOf(level_intent.getStringExtra("level"));
 
         switch (level) {
-            case 0:
+            case 1:
                 desc.setText(easy_mode);
                 break;
-            case 1:
+            case 2:
                 desc.setText(medium_mode);
                 break;
-            case 2:
+            case 3:
                 desc.setText(difficult_mode);
                 break;
             default:
@@ -58,14 +58,11 @@ public class PrepareActivity extends AppCompatActivity {
     }
 
     private void handlerEvent() {
-        ready.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent ques_intent = new Intent(PrepareActivity.this, QuesActivity.class);
-                ques_intent.putExtra("level", String.valueOf(level));
-                startActivity(ques_intent);
-                finish();
-            }
+        ready.setOnClickListener(v -> {
+            Intent ques_intent = new Intent(PrepareActivity.this, QuesActivity.class);
+            ques_intent.putExtra("level", String.valueOf(level));
+            startActivity(ques_intent);
+            finish();
         });
     }
 }

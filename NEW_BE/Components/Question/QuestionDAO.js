@@ -41,7 +41,8 @@ const CreateExamByConfigDAO = (exam_id, callback) => {
             console.log("DAO: " + ListQues.length);
             callback({
                 code: 200,
-                message: ListQues
+                message: ListQues,
+                total: resp[0].time_exam
             });
         } else {
             callback({
